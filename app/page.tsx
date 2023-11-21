@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-
+import React, { useState } from "react";
 import BarCodeCard from "../components/BarCodeCard";
 export default function Home() {
-  const DataArr = [
+  const DataArrSF = [
     {
       id: 4,
       name: "Coit Tower",
@@ -64,20 +64,23 @@ export default function Home() {
   ];
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 ">
-      <div className="mb-8 text-2xl ">
-        <h1>AR LOCATIONS!</h1>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24  ">
+      <div className="mb-8 text-2xl">
+        <h1 className="text-3xl p-4 mb-4 text-center w-full">A/R Explore!</h1>
       </div>
-      <div className="grid grid-cols-3 gap-4">
-        {DataArr.map((item, index) => (
-          <BarCodeCard
-            key={index}
-            image={item.image}
-            name={item.name}
-            location={item.location}
-            id={index + 1}
-          ></BarCodeCard>
-        ))}
+
+      <div className="shadow-inner rounded-2xl shadow-gray-400">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 shadow-2xl rounded-2xl shadow-grey-400 p-5">
+          {DataArrSF.map((item, index) => (
+            <BarCodeCard
+              key={index}
+              image={item.image}
+              name={item.name}
+              location={item.location}
+              id={index + 1}
+            ></BarCodeCard>
+          ))}
+        </div>
       </div>
     </main>
   );
