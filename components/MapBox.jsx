@@ -5,6 +5,8 @@ import React, { useState } from "react";
 
 import Map from "react-map-gl";
 import { HexagonLayer } from "@deck.gl/aggregation-layers";
+import { ScatterplotLayer } from "@deck.gl/layers";
+
 import DeckGL from "@deck.gl/react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { MapView, FirstPersonView } from "@deck.gl/core";
@@ -24,17 +26,23 @@ const LocationAggregatorMap = ({
 }) => {
   // creating tooltip
   function getTooltip({ object }) {
+    console.log(object);
     if (!object) {
       return null;
     }
-    const lat = object.position[1];
-    const lng = object.position[0];
-    const count = object.points.length;
+    // Accessing the first point in the points array
+    const firstPoint = object.points[0].source;
+
+    const lat = firstPoint.position[1];
+    const lng = firstPoint.position[0];
+    const name = firstPoint.name;
+    const location = firstPoint.location;
 
     return `\
-          latitude: ${Number.isFinite(lat) ? lat.toFixed(6) : ""}
-          longitude: ${Number.isFinite(lng) ? lng.toFixed(6) : ""}
-          ${count} locations here`;
+     Name: ${name}\n
+     Location: ${location}\n
+     Latitude: ${Number.isFinite(lat) ? lat.toFixed(6) : ""}
+     Longitude: ${Number.isFinite(lng) ? lng.toFixed(6) : ""}`;
   }
 
   const layers = [
@@ -42,12 +50,13 @@ const LocationAggregatorMap = ({
       id: "heatmap",
       coverage,
       data,
-      elevationRange: [0, 50],
+      colorRange: colorRange,
+      elevationRange: [0, 500],
       elevationScale: data && data.length ? 50 : 0,
       extruded: true,
-      getPosition: (d) => d,
+      getPosition: (d) => d.position,
       pickable: true,
-      radius: 25,
+      radius: 30,
       upperPercentile,
       material,
 
@@ -70,7 +79,7 @@ const LocationAggregatorMap = ({
         <MapView id="map" width="100%" height="50%" controller={true}>
           <Map
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
-            mapStyle="mapbox://styles/petherem/cl2hdvc6r003114n2jgmmdr24"
+            mapStyle="mapbox://styles/mapbox/light-v11"
           ></Map>
         </MapView>
       </DeckGL>
