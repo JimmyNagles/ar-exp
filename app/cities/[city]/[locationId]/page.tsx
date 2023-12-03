@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-export default function LocationPage({
+export default function LocationCityPage({
   params,
 }: {
   params: { LocationId: string };

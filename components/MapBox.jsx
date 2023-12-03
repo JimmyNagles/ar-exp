@@ -23,6 +23,7 @@ const LocationAggregatorMap = ({
   upperPercentile = 100,
   coverage = 1,
   data,
+  initalViewStateProp,
 }) => {
   // creating tooltip
   function getTooltip({ object }) {
@@ -72,7 +73,7 @@ const LocationAggregatorMap = ({
         className=""
         layers={layers}
         effects={[lightingEffect]}
-        initialViewState={INITIAL_VIEW_STATE}
+        initialViewState={initalViewStateProp || INITIAL_VIEW_STATE}
         controller={true}
         getTooltip={getTooltip}
       >
