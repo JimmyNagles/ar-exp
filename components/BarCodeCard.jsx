@@ -6,7 +6,7 @@ const BarCodeCard = ({
   location = "California Street ",
   image = "/californiaSt.png",
   cityId = "SanFrancisco",
-  id = 1,
+  id = 0,
 }) => {
   return (
     <div className=" p-2 hover:text-black w-[200px] md:w-[300px] h-[400px] rounded-2xl  hover:bg-white  backdrop-blur-sm hover:backdrop-blur-lg    flex flex-col justify-center hover:shadow-black items-center   bg-opacity-0   text-white hover:bg-opacity-50 hover:shadow-2xl transition-all duration-1000 ease-in ">

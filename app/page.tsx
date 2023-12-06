@@ -61,7 +61,7 @@ export default function Home() {
               image={item.image}
               name={item.name}
               location={item.location}
-              id={index + 1}
+              id={index}
               cityId="Miami"
             />
           ))}
