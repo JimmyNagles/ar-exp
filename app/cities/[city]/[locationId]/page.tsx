@@ -12,6 +12,7 @@ interface LocationData {
   lat: number;
   long: number;
   link: string;
+  foundProof?: string;
 }
 
 export default function LocationCityPage({
@@ -65,7 +66,26 @@ export default function LocationCityPage({
       <div className="grid grid-rows-4 gap-4">
         {locationData && (
           <div>
-            <h1> NOT FOUND YET</h1>
+            {locationData ? (
+              locationData.foundProof ? (
+                <div>
+                  <h1 className="p-2  w-full h-[50px] text-white shadow-inner shadow-gray-200   text-xs rounded-md  transition-all duration-1000 ease-in bg-green-800 hover:bg-black hover:text-white ">
+                    FOUND
+                  </h1>
+                  <Image
+                    src={locationData.foundProof}
+                    alt={locationData.name}
+                    width={500}
+                    height={200}
+                  />
+                </div>
+              ) : (
+                <h1> NOT FOUND YET</h1>
+              )
+            ) : (
+              // Optionally, you can handle the case where locationData is null or undefined
+              <h1>Loading...</h1>
+            )}
 
             <div>
               <h2>{locationData.name}</h2>
